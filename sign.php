@@ -53,17 +53,17 @@
       <div class="flex flex-col space-y-1">
         <label for="name" class="text-sm">Name:</label>
         <input class="text-sm p-1.5 px-3 outline-none border" type="text" name="name" id="name"
-          placeholder="John Doe" />
+          placeholder="John Doe" required />
       </div>
       <div class="flex flex-col space-y-1">
         <label for="email" class="text-sm">Email:</label>
         <input class="text-sm p-1.5 px-3 outline-none border" type="text" name="email" id="email"
-          placeholder="example@example.com" />
+          placeholder="example@example.com" required />
       </div>
       <div class="flex flex-col space-y-1">
         <label for="pass" class="text-sm">Password:</label>
         <input class="text-sm p-1.5 px-3 outline-none border" type="password" name="pass" id="pass"
-          placeholder="••••••••" />
+          placeholder="••••••••" required />
       </div>
       <input class="cursor-pointer bg-green-500 text-white py-2" type="submit" value="Submit" />
       <div>

@@ -10,10 +10,12 @@ if (!isset($_SESSION["log"])) {
 //including db
 include ("partials/_dbconnect.php");
 
+$id = $_SESSION["id"];
+
 //taking account data from database
 $sql = "SELECT * FROM `users` WHERE `id` = ?";
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "s", $_SESSION["id"]);
+mysqli_stmt_bind_param($stmt, "s", $id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
@@ -73,7 +75,7 @@ $profile_img = $row["img"];
       <button onclick="menuHandler()">
         <img src="images/menu.png" class="w-10 h-10" />
       </button>
-      <div class="bg-white flex flex-col rounded-md py-2 absolute z-10 left-0 top-[120%] border opacity-0"
+      <div class="bg-white flex flex-col shadow-md rounded-md py-2 absolute z-10 left-0 top-[120%] border opacity-0"
         id="menu-container">
         <button type="button" onclick="window.location.assign('partials/_logout-handler.php')"
           class="hover:bg-[#f5f5f5] px-3 py-2 cursor-pointer hidden" id="logout-button">
@@ -97,7 +99,8 @@ $profile_img = $row["img"];
         }
         ?>
       </button>
-      <div class="bg-white rounded-md py-2 absolute z-10 right-0 top-[120%] border opacity-0" id="profile-setting">
+      <div class="bg-white rounded-md shadow-md py-2 absolute z-10 right-0 top-[120%] border opacity-0"
+        id="profile-setting">
         <form action="partials/_img-handler.php" enctype="multipart/form-data" method="post" id="profile-form">
           <button type="button" class="hover:bg-[#f5f5f5] px-3 py-2 cursor-default">
             Change Profile Picture
@@ -109,30 +112,61 @@ $profile_img = $row["img"];
       </div>
     </div>
   </header>
+  <?php
+  //taking data of attendance
+  $sql = "SELECT $id FROM `attendance`";
+  $stmt = mysqli_prepare($conn, $sql);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+
+  //initializing var
+  $attendance = 0;
+  $present = 0;
+  $leaves = 0;
+
+  //increamenting data
+  while ($row = mysqli_fetch_assoc($result)) {
+    $attendance++;
+    if ($row[$id] == 1) {
+      $present++;
+    }
+    if ($row[$id] == 2) {
+      $leaves++;
+    }
+  }
+  ?>
   <!-- statistics container -->
   <div class="grid grid-cols-1 md:grid-cols-3">
-    <!-- total classes container -->
-    <div class="m-4 p-4 flex justify-between bg-white rounded-md shadow-md">
-      <p class="">Total Classes:</p>
-      <span>0</span>
-    </div>
     <!-- current attendance container -->
     <div class="m-4 p-4 flex justify-between bg-white rounded-md shadow-md">
       <p class="">Total Attendance:</p>
-      <span>0</span>
+      <span>
+        <?php echo $attendance; ?>
+      </span>
+    </div>
+    <!-- current absent container -->
+    <div class="m-4 p-4 flex justify-between bg-white rounded-md shadow-md">
+      <p class="">Total Present:</p>
+      <span>
+        <?php echo $present; ?>
+      </span>
     </div>
     <!-- current leave container -->
     <div class="m-4 p-4 flex justify-between bg-white rounded-md shadow-md">
       <p class="">Total Leaves:</p>
-      <span>0</span>
+      <span>
+        <?php echo $leaves; ?>
+      </span>
     </div>
   </div>
   <!-- button container -->
   <div class="m-4 p-4 grid grid-cols-1 md:grid-cols-3 justify-between bg-white rounded-md shadow-md gap-4 md:gap-8">
-    <button class="py-2 rounded-md bg-green-600 active:bg-green-800 text-white shadow-md">
+    <button class="py-2 rounded-md bg-green-600 active:bg-green-800 text-white shadow-md"
+      onclick="window.location.assign('partials/_mark?mark=1')">
       Mark Attendance
     </button>
-    <button class="py-2 rounded-md bg-orange-600 active:bg-orange-700 text-white shadow-md">
+    <button class="py-2 rounded-md bg-orange-600 active:bg-orange-700 text-white shadow-md"
+      onclick="window.location.assign('partials/_mark?mark=2')">
       Mark Leave
     </button>
     <button class="py-2 rounded-md bg-blue-600 active:bg-blue-800 text-white shadow-md">
