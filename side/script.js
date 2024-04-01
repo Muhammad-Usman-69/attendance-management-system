@@ -5,7 +5,7 @@ function profileSetting() {
   //showing and hiding setting container
   document.getElementById("profile-setting").classList.toggle("opacity-0");
   //showing and hiding profile img uploader
-  document.getElementById("profile-submitter").classList.toggle("hidden");
+  document.getElementById("profile-img").classList.toggle("hidden");
 }
 
 //handling submitting of profile form
@@ -19,4 +19,18 @@ function menuHandler() {
   document.getElementById("menu-container").classList.toggle("slide");
   //showing and hiding menu container
   document.getElementById("menu-container").classList.toggle("opacity-0");
+  //showing and hiding logout and leave req button
+  document.getElementById("logout-button").classList.toggle("hidden");
+  document.getElementById("leave-button").classList.toggle("hidden");
+}
+
+//alert
+function hideAlert(element) {
+  //hiding alert
+  element.parentNode.classList.add("opacity-0");
+
+  //removing alert
+  setTimeout(() => {
+    element.parentNode.remove();
+  }, 200);
 }

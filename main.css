@@ -8,14 +8,12 @@
 
 @keyframes slideIn {
   0% {
-    -webkit-transform: translateY(120%);
-    transform: translateY(120%);
+    top: 110%;
     opacity: 0;
   }
 
   100% {
-    -webkit-transform: translateY(130%);
-    transform: translateY(130%);
+    top: 120%;
     opacity: 1;
   }
 }
