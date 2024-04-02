@@ -1,2 +1,0 @@
-sql for adding column in attendance:
-ALTER TABLE `attendance` ADD `112D` INT(1) NOT NULL AFTER `date`;

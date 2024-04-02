@@ -74,5 +74,13 @@ $sql = "ALTER TABLE `attendance` ADD $id INT(1)";
 $stmt = mysqli_prepare($conn, $sql);
 $result = mysqli_stmt_execute($stmt);
 
+//Get today's date
+$date = date("Y-m-d");
+
+//marking current as absent
+$sql = "UPDATE `attendance` SET $id = '3' WHERE `date` = $date";
+$stmt = mysqli_prepare($conn, $sql);
+$result = mysqli_stmt_execute($stmt);
+
 header("location: /sign?alert=You have been signed up");
 exit();

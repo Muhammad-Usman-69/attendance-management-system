@@ -32,6 +32,7 @@ $profile_img = $row["img"];
   <meta name="author" content="Muhammad Usman" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Attendance Management System</title>
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="side/style.css" />
 </head>
@@ -81,7 +82,8 @@ $profile_img = $row["img"];
           class="hover:bg-[#f5f5f5] px-3 py-2 cursor-pointer hidden" id="logout-button">
           Log out
         </button>
-        <button type="button" class="hover:bg-[#f5f5f5] px-3 py-2 cursor-pointer hidden" id="leave-button">
+        <button type="button" class="hover:bg-[#f5f5f5] px-3 py-2 cursor-pointer hidden" id="leave-button"
+          onclick="window.location.assign('partials/_mark?mark=2')">
           Leave Request
         </button>
       </div>
@@ -130,7 +132,7 @@ $profile_img = $row["img"];
     if ($row[$id] == 1) {
       $present++;
     }
-    if ($row[$id] == 2) {
+    if ($row[$id] == 4) {
       $leaves++;
     }
   }
@@ -169,10 +171,53 @@ $profile_img = $row["img"];
       onclick="window.location.assign('partials/_mark?mark=2')">
       Mark Leave
     </button>
-    <button class="py-2 rounded-md bg-blue-600 active:bg-blue-800 text-white shadow-md">
+    <button class="py-2 rounded-md bg-blue-600 active:bg-blue-800 text-white shadow-md"
+      onclick="document.getElementById('attendance-container').classList.toggle('hidden')">
       View Attendance
     </button>
   </div>
+  <!-- attendance container -->
+  <div class="mx-4 my-8 p-4 space-y-4 bg-white rounded-md shadow-md hidden" id="attendance-container">
+    <?php
+    //showing attendance
+    //taking data of attendance
+    $sql = "SELECT `date`, $id FROM `attendance`";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    //increamenting data
+    while ($row = mysqli_fetch_assoc($result)) {
+
+      //displaying present
+      if ($row[$id] == 1) {
+        echo '<div class="p-2 bg-green-100 border-green-600 border-2 flex items-center justify-between rounded-md shadow-md">
+          <p class="text-lg font-semibold px-2 text-green-700">' . $row['date'] . '</p>
+          <img src="images/tick.png" class="w-10 h-10 p-1 border-2 border-green-700 rounded-full">
+        </div>';
+      }
+
+      //displaying absent
+      if ($row[$id] == 3) {
+        echo '<div class="p-2 bg-red-100 border-red-700 border-2 flex items-center justify-between rounded-md shadow-md">
+          <p class="text-lg font-semibold px-2 text-red-700">' . $row['date'] . '</p>
+          <img src="images/close.png" class="w-10 h-10 p-1 border-2 border-red-700 rounded-full">
+        </div>';
+      }
+
+      //displaying absent
+      if ($row[$id] == 4) {
+        echo '<div class="p-2 bg-orange-100 border-orange-600 border-2 flex items-center justify-between rounded-md shadow-md">
+          <p class="text-lg font-semibold px-2 text-orange-700">' . $row['date'] . '</p>
+          <img src="images/leave.png" class="w-10 h-10 p-1 border-2 border-orange-700 rounded-full">
+        </div>';
+      }
+
+    }
+    ?>
+  </div>
+
+
   <script src="side/script.js"></script>
 </body>
 
