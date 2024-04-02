@@ -128,7 +128,9 @@ $profile_img = $row["img"];
 
   //increamenting data
   while ($row = mysqli_fetch_assoc($result)) {
-    $attendance++;
+    if ($row[$id] != 0) {
+      $attendance++;
+    }
     if ($row[$id] == 1) {
       $present++;
     }
@@ -212,6 +214,8 @@ $profile_img = $row["img"];
           <img src="images/leave.png" class="w-10 h-10 p-1 border-2 border-orange-700 rounded-full">
         </div>';
       }
+
+      
 
     }
     ?>

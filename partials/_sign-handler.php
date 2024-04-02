@@ -70,7 +70,7 @@ if (!$result) {
 }
 
 //inserting for attendance
-$sql = "ALTER TABLE `attendance` ADD $id INT(1)";
+$sql = "ALTER TABLE `attendance` ADD $id INT(1) NOT NULL DEFAULT '0'";
 $stmt = mysqli_prepare($conn, $sql);
 $result = mysqli_stmt_execute($stmt);
 
@@ -78,7 +78,7 @@ $result = mysqli_stmt_execute($stmt);
 $date = date("Y-m-d");
 
 //marking current as absent
-$sql = "UPDATE `attendance` SET $id = '3' WHERE `date` = $date";
+$sql = "UPDATE `attendance` SET `$id` = '3' WHERE `date` = '$date'";
 $stmt = mysqli_prepare($conn, $sql);
 $result = mysqli_stmt_execute($stmt);
 
