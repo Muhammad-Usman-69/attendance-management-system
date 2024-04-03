@@ -198,6 +198,14 @@ $profile_img = $row["img"];
           <img src="images/tick.png" class="w-10 h-10 p-1 border-2 border-green-700 rounded-full">
         </div>';
       }
+      
+      //displaying leave req
+      if ($row[$id] == 2) {
+        echo '<div class="p-2 bg-orange-100 border-orange-600 border-2 flex items-center justify-between rounded-md shadow-md">
+          <p class="text-lg font-semibold px-2 text-orange-700">' . $row['date'] . '</p>
+          <img src="images/hourglass.png" class="w-10 h-10 p-1 border-2 border-orange-700 rounded-full">
+        </div>';
+      }
 
       //displaying absent
       if ($row[$id] == 3) {
@@ -214,9 +222,6 @@ $profile_img = $row["img"];
           <img src="images/leave.png" class="w-10 h-10 p-1 border-2 border-orange-700 rounded-full">
         </div>';
       }
-
-      
-
     }
     ?>
   </div>
