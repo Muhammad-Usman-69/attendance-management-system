@@ -18,6 +18,11 @@ include ("_dbconnect.php");
 
 $id = $_SESSION["id"];
 
+//if admin
+if ($_SESSION["status"] == "admin") {
+    $id = $_GET["id"];
+}
+
 //Get today's date
 $date = date("Y-m-d");
 
@@ -29,12 +34,11 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $num = mysqli_num_rows($result);
 if ($num != 0) {
-    $alert = "Already Marked";
-    if ($mark == 2) {
+    if ($mark == 2 && $_SESSION["status" == "student"]) {
         $alert = "Request has already been forwarded to Admins";
+        header("location: /?error=$alert");
+        exit();
     }
-    header("location: /?error=$alert");
-    exit();
 }
 
 //updating
@@ -44,11 +48,18 @@ mysqli_stmt_bind_param($stmt, "is", $mark, $date);
 $bool = mysqli_stmt_execute($stmt);
 if ($bool) {
     $alert = "Marked Successfully";
-    if ($mark == 2) {
-        $alert = "Request has been forwarded to Admins";
+
+    //for student
+    if ($mark == 2 && $_SESSION["status"] == "student") {
+        header("location: /?alert=Request has been forwarded to Admins");
+        exit();
     }
-    header("location: /?alert=$alert");
-    exit();
+
+    //for admin
+    if ($_SESSION["status"] == "admin") {
+        header("location: /admin?alert=$alert&req=on");
+        exit();
+    }
 }
 
 // 1 = present

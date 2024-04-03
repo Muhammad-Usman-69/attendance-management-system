@@ -35,6 +35,7 @@ if ($num == 0) {
 $row = mysqli_fetch_assoc($result);
 $name = $row["name"];
 $id = $row["id"];
+$status = $row["status"];
 
 //verifying pass
 if (password_verify($pass, $row["pass"])) {
@@ -43,6 +44,7 @@ if (password_verify($pass, $row["pass"])) {
     $_SESSION["name"] = $name;
     $_SESSION["email"] = $email;
     $_SESSION["id"] = $id;
+    $_SESSION["status"] = $status;
     header("location: /?alert=You are logged in");
     exit();
 } else {

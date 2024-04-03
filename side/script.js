@@ -4,6 +4,8 @@ function profileSetting() {
   document.getElementById("profile-setting").classList.toggle("slide");
   //showing and hiding setting container
   document.getElementById("profile-setting").classList.toggle("opacity-0");
+  //changing z-index
+  document.getElementById("profile-setting").classList.toggle("z-30");
   //showing and hiding profile img uploader
   document.getElementById("profile-img").classList.toggle("hidden");
 }
