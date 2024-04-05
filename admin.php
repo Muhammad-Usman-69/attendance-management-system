@@ -9,7 +9,7 @@ if (!isset($_SESSION["log"])) {
 
 //check if student
 if ($_SESSION["status"] == "student") {
-  header("location:admin");
+  header("location:/");
   exit();
 }
 
@@ -243,6 +243,11 @@ $profile_img = $row["img"];
 
           //increamenting data
           while ($row = mysqli_fetch_assoc($result)) {
+
+            //arr for attendance
+            $arrAttendance = [];
+            array_push($arrAttendance, $row[$id]);
+
             if ($row[$id] != 0) {
               $attendance++;
             }
@@ -255,6 +260,21 @@ $profile_img = $row["img"];
             if ($row[$id] == 4) {
               $leave++;
             }
+          }
+
+          //implemeting current attendance
+          //getting last row
+          $end = end($arrAttendance);
+          if ($end == 1) {
+            $status = "Present";
+          } else if ($end == 3) {
+            $status = "Absent";
+          } else if ($end == 4) {
+            $status = "Leave";
+          } else if ($end == 2) {
+            $status = "Leave Request";
+          } else {
+            $status = "Unattended";
           }
 
           //implementing grading
@@ -288,7 +308,7 @@ $profile_img = $row["img"];
           <td class="text-center py-3">' . $present . '</td>
           <td class="text-center py-3">' . $absent . '</td>
           <td class="text-center py-3">' . $leave . '</td>
-          <td class="text-center py-3">Present</td>
+          <td class="text-center py-3">' . $status . '</td>
           <td class="text-center py-3">' . $grade . '</td>
           <td class="flex items-center justify-center py-3">
             <button class="flex items-center p-2 text-white bg-cyan-500 shadow-md hover:bg-cyan-400 rounded-md"

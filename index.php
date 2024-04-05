@@ -9,7 +9,7 @@ if (!isset($_SESSION["log"])) {
 
 //check if admin
 if ($_SESSION["status"] == "admin") {
-  header("location:admin");
+  header("location:/admin");
   exit();
 }
 

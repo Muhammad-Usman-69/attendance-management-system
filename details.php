@@ -9,7 +9,7 @@ if (!isset($_SESSION["log"])) {
 
 //check if student
 if ($_SESSION["status"] == "student") {
-    header("location:admin");
+    header("location:/");
     exit();
 }
 
@@ -34,6 +34,8 @@ include ("partials/_dbconnect.php");
 </head>
 
 <body class="bg-[#F8F8F8]">
+    <button class="py-2 px-4 m-4 mb-0 rounded-md bg-blue-600 active:bg-blue-800 text-white shadow-md z-20"
+        onclick="window.location.assign(`/admin`)">Home</button>
     <div class="m-4 p-4 space-y-4 bg-white rounded-md shadow-md">
         <?php
         //showing attendance
