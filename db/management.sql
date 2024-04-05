@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2024 at 05:51 AM
+-- Generation Time: Apr 05, 2024 at 05:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,8 +39,10 @@ CREATE TABLE `attendance` (
 
 INSERT INTO `attendance` (`date`, `4lc4CWQ9`, `rAfSceHn`) VALUES
 ('2024-04-01', 1, 0),
-('2024-04-02', 1, 3),
-('2024-04-03', 1, 0);
+('2024-04-02', 1, 1),
+('2024-04-03', 1, 1),
+('2024-04-04', 1, 3),
+('2024-04-05', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -62,8 +64,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `img`, `status`) VALUES
+('1rhqYYnp', 'admin', 'quirkyshaw1@typingsquirrel.com', '$2y$10$oy/N8Zj/vRYSKAe2HmHKjuh6XRMuJMkfqev2m6jAvW6cUbSu16aDO', 'none', 'admin'),
 ('4lc4CWQ9', 'John Doe', 'romanticfranklin@freethecookies.com', '$2y$10$.MUWpkeOXj.aOlUr75qR3.mwINjCPKJ76lDgTQLdpdR.Z9nl5kfwi', '660a6b514e3756.03854614.jpg', 'student'),
-('rAfSceHn', 'John Doe 2', 'optimisticdijkstra9@tomorjerry.com', '$2y$10$cbzONnFD08x/MRMNuSu0JeUUR7moVxiaK6YnLQ2TJnAVIOi7OBh42', 'none', 'student');
+('rAfSceHn', 'Micheal Clover', 'optimisticdijkstra9@tomorjerry.com', '$2y$10$cbzONnFD08x/MRMNuSu0JeUUR7moVxiaK6YnLQ2TJnAVIOi7OBh42', 'none', 'student');
 
 --
 -- Indexes for dumped tables

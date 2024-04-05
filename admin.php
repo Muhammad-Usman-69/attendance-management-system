@@ -39,7 +39,7 @@ $profile_img = $row["img"];
   <meta charset="UTF-8" />
   <meta name="author" content="Muhammad Usman" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Attendance Management System</title>
+  <title>Admin Panel - Attendance Management System</title>
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="side/style.css" />

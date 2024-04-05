@@ -23,6 +23,18 @@ if ($_SESSION["status"] == "admin") {
     $id = $_GET["id"];
 }
 
+//if admin is changing atendance
+if ($_GET["date"] && $_SESSION["status"] == "admin") {
+    $date = $_GET["date"];
+    $sql = "UPDATE `attendance` SET `$id` = '$mark' WHERE `date` = '$date'";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_execute($stmt);
+
+    //redirecting admin
+    header("location: /details?id=$id");
+    exit();
+}
+
 //Get today's date
 $date = date("Y-m-d");
 
