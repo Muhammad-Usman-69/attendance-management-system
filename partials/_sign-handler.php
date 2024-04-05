@@ -70,7 +70,7 @@ if (!$result) {
 }
 
 //inserting for attendance
-$sql = "ALTER TABLE `attendance` ADD $id INT(1) NOT NULL DEFAULT '0'";
+$sql = "ALTER TABLE `attendance` ADD $id INT(1) NOT NULL DEFAULT '0' AFTER `date`";
 $stmt = mysqli_prepare($conn, $sql);
 $result = mysqli_stmt_execute($stmt);
 

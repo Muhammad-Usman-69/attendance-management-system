@@ -226,18 +226,73 @@ $profile_img = $row["img"];
         </tr>
       </thead>
       <tbody>
-        <tr class="border-b-gray-500 border-b bg-[#F8F8F8] last:border-b-0">
-          <td class="text-center py-3">John Doe</td>
-          <td class="text-center py-3">hj32492</td>
-          <td class="text-center py-3">3</td>
-          <td class="text-center py-3">3</td>
-          <td class="text-center py-3">0</td>
-          <td class="text-center py-3">0</td>
+        <?php
+        //taking names of account
+        $ids = $arr;
+        foreach ($ids as $id) {
+          $sql = "SELECT `$id` FROM `attendance` ORDER BY `date` ASC";
+          $stmt = mysqli_prepare($conn, $sql);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+
+          //initializing var
+          $attendance = 0;
+          $present = 0;
+          $leave = 0;
+          $absent = 0;
+
+          //increamenting data
+          while ($row = mysqli_fetch_assoc($result)) {
+            if ($row[$id] != 0) {
+              $attendance++;
+            }
+            if ($row[$id] == 1) {
+              $present++;
+            }
+            if ($row[$id] == 3) {
+              $absent++;
+            }
+            if ($row[$id] == 4) {
+              $leave++;
+            }
+          }
+
+          //implementing grading
+          if ($present == ($attendance * 0)) {
+            $grade = "E";
+          } else if ($present <= $attendance * 30 / 100) {
+            $grade = "D";
+          } else if ($present <= $attendance * 50 / 100) {
+            $grade = "C";
+          } else if ($present <= $attendance * 70 / 100) {
+            $grade = "B";
+          } else if ($present <= $attendance * 90 / 100) {
+            $grade = "A";
+          } else {
+            $grade = "A+";
+          }
+
+          //getting name
+          $sql = "SELECT `name` FROM `users` WHERE `id` = ?";
+          $stmt = mysqli_prepare($conn, $sql);
+          mysqli_stmt_bind_param($stmt, "s", $id);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+          $row = mysqli_fetch_assoc($result);
+
+          //echoing data
+          echo '<tr class="border-b-gray-500 border-b bg-[#F8F8F8] last:border-b-0">
+          <td class="text-center py-3">' . $row["name"] . '</td>
+          <td class="text-center py-3">' . $id . '</td>
+          <td class="text-center py-3">' . $attendance . '</td>
+          <td class="text-center py-3">' . $present . '</td>
+          <td class="text-center py-3">' . $absent . '</td>
+          <td class="text-center py-3">' . $leave . '</td>
           <td class="text-center py-3">Present</td>
-          <td class="text-center py-3">A</td>
+          <td class="text-center py-3">' . $grade . '</td>
           <td class="flex items-center justify-center py-3">
             <button class="flex items-center p-2 text-white bg-cyan-500 shadow-md hover:bg-cyan-400 rounded-md"
-              onclick="window.location.assign('details?id=$id')">
+              onclick="window.location.assign(`details?id=' . $id . '`)">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="feather feather-eye">
@@ -246,7 +301,9 @@ $profile_img = $row["img"];
               </svg>
             </button>
           </td>
-        </tr>
+        </tr>';
+        }
+        ?>
       </tbody>
     </table>
   </div>

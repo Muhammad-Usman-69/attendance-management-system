@@ -60,6 +60,10 @@ if ($bool) {
         header("location: /admin?alert=$alert&req=on");
         exit();
     }
+
+    //reedirecting for normal
+    header("location: /?alert=$alert");
+    exit();
 }
 
 // 1 = present
