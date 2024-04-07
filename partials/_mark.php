@@ -46,11 +46,13 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $num = mysqli_num_rows($result);
 if ($num != 0) {
-    if ($mark == 2 && $_SESSION["status" == "student"]) {
+    if ($mark == 2 && $_SESSION["status"] == "student") {
         $alert = "Request has already been forwarded to Admins";
         header("location: /?error=$alert");
         exit();
     }
+    header("location:/?error=Already Marked");
+    exit();
 }
 
 //updating

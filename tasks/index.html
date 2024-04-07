@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+    <style>
+      li {
+        font-size: 24px;
+      }
+      .line-through {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Student Panel:</h1>
+      <ol>
+        <li>User panel may include the registration page, and login</li>
+        <li>
+          There must be a 3 buttons , mark attendance , Mark Leave and view
+          button
+        </li>
+        <li>
+          Mark attendance in which students can mark his/her attendance as
+          present
+        </li>
+        <li>View button in which student can view all the marked attendance</li>
+        <li>
+          Student which mark his/her attendance once in a day can’t mark it
+          again in as well as not delete his/her attendance.
+        </li>
+        <li>Also give the option to edit the profile picture</li>
+        <li>User should be able to Send Leave Request to admin for leaves.</li>
+      </ol>
+    </div>
+    <div>
+      <h1>Admin Panel:</h1>
+      <ol>
+        <li>The admin can login through login page</li>
+        <li>View all the record of login students</li>
+        <li>The admin can edit, add, and delete the students attendance</li>
+        <li>
+          Admin should be able to create a report of Users. FROM and TO Dates
+          which will show specific user attendance
+        </li>
+        <li>
+          Leave Approval Modules. There should be proper count of Leaves ,
+          Present’s , Absents etc
+        </li>
+        <li>
+          Admin should be able to create a Complete System Report FROM and TO
+          dates of all attendances
+        </li>
+        <li>
+          Add up grading System, if user attended 26 Days he should have A grade
+          for other grades setting add up a module. E.g. 10 Days = D grade etc.
+          etc. in admin panel
+        </li>
+      </ol>
+    </div>
+    <script>
+      let lists = document.querySelectorAll("li");
+      lists.forEach((list) => {
+        list.addEventListener("click", () => {
+          list.classList.toggle("line-through");
+        });
+      });
+    </script>
+  </body>
+</html>

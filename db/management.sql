@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 05:38 AM
+-- Generation Time: Apr 07, 2024 at 01:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `attendance` (
   `date` date NOT NULL,
+  `rmFjMed2` int(1) NOT NULL DEFAULT 0,
   `4lc4CWQ9` int(1) DEFAULT 0,
   `rAfSceHn` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -37,12 +38,14 @@ CREATE TABLE `attendance` (
 -- Dumping data for table `attendance`
 --
 
-INSERT INTO `attendance` (`date`, `4lc4CWQ9`, `rAfSceHn`) VALUES
-('2024-04-01', 1, 0),
-('2024-04-02', 1, 1),
-('2024-04-03', 1, 1),
-('2024-04-04', 1, 3),
-('2024-04-05', 1, 3);
+INSERT INTO `attendance` (`date`, `rmFjMed2`, `4lc4CWQ9`, `rAfSceHn`) VALUES
+('2024-04-01', 0, 1, 0),
+('2024-04-02', 0, 1, 1),
+('2024-04-03', 0, 3, 1),
+('2024-04-04', 0, 1, 3),
+('2024-04-05', 0, 1, 1),
+('2024-04-06', 0, 1, 3),
+('2024-04-07', 4, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -66,7 +69,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `img`, `status`) VALUES
 ('1rhqYYnp', 'admin', 'quirkyshaw1@typingsquirrel.com', '$2y$10$oy/N8Zj/vRYSKAe2HmHKjuh6XRMuJMkfqev2m6jAvW6cUbSu16aDO', 'none', 'admin'),
 ('4lc4CWQ9', 'John Doe', 'romanticfranklin@freethecookies.com', '$2y$10$.MUWpkeOXj.aOlUr75qR3.mwINjCPKJ76lDgTQLdpdR.Z9nl5kfwi', '660a6b514e3756.03854614.jpg', 'student'),
-('rAfSceHn', 'Micheal Clover', 'optimisticdijkstra9@tomorjerry.com', '$2y$10$cbzONnFD08x/MRMNuSu0JeUUR7moVxiaK6YnLQ2TJnAVIOi7OBh42', 'none', 'student');
+('rAfSceHn', 'Micheal Clover', 'optimisticdijkstra9@tomorjerry.com', '$2y$10$cbzONnFD08x/MRMNuSu0JeUUR7moVxiaK6YnLQ2TJnAVIOi7OBh42', 'none', 'student'),
+('rmFjMed2', 'Harry Van Dusen', 'recursingrosalind9@freethecookies.com', '$2y$10$LQv1TAUEnLe8c91/ULlLAOihhiQ4d/Y0eT5DbrWJGLdvqHyzQeXF.', '661281c3922d65.65909681.png', 'student');
 
 --
 -- Indexes for dumped tables
