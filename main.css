@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .slide {
-    animation: slideIn 0.3s;
+  animation: slideIn 0.3s;
 }
 
 @keyframes slideIn {
@@ -16,4 +16,8 @@
     top: 120%;
     opacity: 1;
   }
+}
+
+.calender::-webkit-calendar-picker-indicator {
+  @apply cursor-pointer p-2 rounded border-none bg-gray-100;
 }

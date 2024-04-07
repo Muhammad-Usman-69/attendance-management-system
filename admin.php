@@ -328,6 +328,52 @@ $profile_img = $row["img"];
     </table>
   </div>
 
+  <?php
+  //getting max and minimum date
+  $sql = "SELECT `date` FROM `attendance`";
+  $stmt = mysqli_prepare($conn, $sql);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  //taking dates in col
+  $col = array();
+  while ($row = mysqli_fetch_row($result)) {
+    array_push($col, $row);
+  }
+  $start = $col[0][0];
+  $end = end($col)[0];
+  ?>
+  <!-- report container -->
+  <div class="m-4 p-4 bg-white rounded-md shadow-md">
+    <form action="partials/_report.php" class="flex justify-between items-center">
+      <div class="flex space-x-6 items-center text-black">
+        <?php
+        echo '<input type="date" name="start" id="start" min=' . $start . ' max=' . $end . ' class="calender outline-none text-black" value="' . $start . '">';
+        ?>
+        <span class="font-semibold text-lg">To</span>
+        <?php
+        echo '<input type="date" name="end" id="end" min=' . $start . ' max=' . $end . ' class="calender outline-none" value="' . $end . '">';
+        ?>
+      </div>
+      <select name="user" id="user" class="outline-none">
+        <option value="*">All</option>
+        <?php
+        //taking name and ids
+        foreach ($arr as $id) {
+          $sql = "SELECT `name` FROM `users` WHERE `id` = ?";
+          $stmt = mysqli_prepare($conn, $sql);
+          mysqli_stmt_bind_param($stmt, "s", $id);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+          $row = mysqli_fetch_assoc($result);
+          echo '<option value="' . $id . '">' . $row["name"] . '</option>';
+        }
+        ?>
+      </select>
+      <button type="submit" class="py-2 px-4 rounded-md bg-blue-600 active:bg-blue-800 text-white shadow-md z-20">Make
+        Report</button>
+    </form>
+  </div>
+
 
   <script src="side/script.js"></script>
 </body>
